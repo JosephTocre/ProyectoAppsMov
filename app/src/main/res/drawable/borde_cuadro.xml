@@ -7,7 +7,7 @@
 
     <!-- Borde verde suave -->
     <stroke
-        android:width="2dp"
+        android:width="1dp"
         android:color="@color/black" />
 
     <!-- Bordes redondeados -->
