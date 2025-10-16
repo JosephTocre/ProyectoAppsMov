@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/naranjaclaro"
+
     tools:context=".crearUsuario">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,14 +13,15 @@
         android:gravity="center">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/logoapps"
-            android:padding="10dp" />
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="40dp"
+            android:src="@drawable/logoapps"
+            android:contentDescription="Logo"
+            android:background="@drawable/circle_bg"
+            android:padding="20dp"
+            android:elevation="8dp" />
 
         <EditText
             android:id="@+id/txtapellido"
@@ -28,15 +30,18 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-
             android:gravity="center"
             android:hint="Nombres"
             android:fontFamily="@font/poppins_regular"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/person"
+            android:drawablePadding="10dp"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:textColor="@color/black" />
+
         <EditText
             android:id="@+id/txtusuario"
             android:layout_width="match_parent"
@@ -44,15 +49,18 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-
             android:gravity="center"
             android:hint="Nombre de usuario"
             android:fontFamily="@font/poppins_regular"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/person"
+            android:drawablePadding="10dp"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:textColor="@color/black" />
+
         <EditText
             android:id="@+id/txtclave1"
             android:layout_width="match_parent"
@@ -63,12 +71,16 @@
             android:gravity="center"
             android:hint="Contraseña"
             android:fontFamily="@font/poppins_regular"
+            android:background="@drawable/input_bg"
             android:inputType="textPassword"
+            android:drawableStart="@drawable/lock"
+            android:drawablePadding="10dp"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:textColor="@color/black" />
+
         <EditText
             android:id="@+id/txtclave2"
             android:layout_width="match_parent"
@@ -76,16 +88,19 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-
             android:gravity="center"
             android:hint="Confirmar contraseña"
             android:fontFamily="@font/poppins_regular"
+            android:background="@drawable/input_bg"
             android:inputType="textPassword"
+            android:drawableStart="@drawable/lock"
+            android:drawablePadding="10dp"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:textColor="@color/black" />
+
         <Button
             android:id="@+id/btnCrear"
             android:layout_width="match_parent"
@@ -93,37 +108,39 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/amarillo"
             android:elevation="6dp"
             android:onClick="RegistrarUsuario"
             android:text="Crear Cuenta"
             android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/black"
+            android:backgroundTint="@color/naranja"
+            android:textColor="@android:color/white"
             android:textSize="18sp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:gravity="center" >
+            android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ya tienes una cuenta?"
+                android:text="¿Ya tienes una cuenta?"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingRight="20dp"
-                android:textColor="#ADEF06DB"
-                />
+                android:textColor="#ADEF06DB" />
+
             <Button
                 android:id="@+id/btnVolver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:backgroundTint="@color/amarillo"
+                android:background="@drawable/btn_outline"
                 android:onClick="MostrarLogin"
                 android:paddingRight="20dp"
-                android:text="Iniciar Sesion"
+                android:text="Iniciar Sesión"
                 android:fontFamily="@font/poppins_regular"
                 android:textAllCaps="false"
                 android:textColor="@color/black"

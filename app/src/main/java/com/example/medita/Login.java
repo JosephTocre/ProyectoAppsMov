@@ -38,12 +38,7 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, "Ingrese usuario y clave", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        // URL de tu archivo PHP
-        String url = "http://10.0.2.2/medita/login.php"; // Si usas emulador Android
-        // Si estás usando un celular físico conectado a la misma red Wi-Fi:
-        // reemplaza 10.0.2.2 por tu IP local, por ejemplo:
-        // String url = "http://192.168.1.5/medita/login.php";
+        String url = "http://10.0.2.2/medita/login.php";
 
         try {
             JSONObject json = new JSONObject();
@@ -59,7 +54,7 @@ public class Login extends AppCompatActivity {
                             if (response.getBoolean("success")) {
                                 Toast.makeText(this, response.getString("message"), Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(this, Inicio.class);
+                                Intent intent = new Intent(this, barra_nav.class);
                                 intent.putExtra("usuario", response.getString("nombres"));
                                 startActivity(intent);
                                 finish();

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/breatheView"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_marginRight="-40dp"
+        android:layout_marginTop="-10dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/flor"
+        android:layout_gravity="right|top"
+        android:scaleX="-1"
+        tools:ignore="MissingConstraints"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvSaludo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Hola, [Usuario]"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:lineHeight="30dp"
+                android:paddingRight="100dp"
+                android:text="Programas"
+                android:textAppearance="?attr/textAppearanceBody1" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:cardCornerRadius="16dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#FACDF0"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Antiestrés"
+                        android:layout_marginBottom="8dp"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="120dp"
+                        android:text="Sesiones de meditación para aliviar el estrés."
+                        android:lineHeight="20sp"
+                        android:textAppearance="?attr/textAppearanceBody2" />
+                </LinearLayout>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animMeditacion"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    app:lottie_rawRes="@raw/dormir"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/concentracion"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:cardCornerRadius="16dp"
+                android:backgroundTint="#FDD395"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Concentración"
+                        android:layout_marginBottom="8dp"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="100dp"
+                        android:lineHeight="20sp"
+                        android:text="Meditaciones para mejorar el rendimiento"
+                        android:textAppearance="?attr/textAppearanceBody2" />
+                </LinearLayout>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animConcentracion"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    app:lottie_rawRes="@raw/meditar"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/ansiedad"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:cardCornerRadius="16dp"
+                android:backgroundTint="#D9F0BC"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ansiedad"
+                        android:layout_marginBottom="8dp"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="100dp"
+                        android:lineHeight="20sp"
+                        android:text="Ejercicios de respiración y mindfulness"
+                        android:textAppearance="?attr/textAppearanceBody2" />
+                </LinearLayout>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animAnsiedad"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    app:lottie_rawRes="@raw/dormir"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/breathe"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:cardCornerRadius="16dp"
+                android:backgroundTint="#F6E99B"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Relajación"
+                        android:layout_marginBottom="8dp"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <TextView
+                        android:layout_width="224dp"
+                        android:layout_height="wrap_content"
+                        android:lineHeight="20sp"
+                        android:paddingRight="100dp"
+                        android:text="Meditaciones para calmar la mente"
+                        android:textAppearance="?attr/textAppearanceBody2" />
+                </LinearLayout>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animRelajacion"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    app:lottie_rawRes="@raw/meditar"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/ira"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:cardCornerRadius="16dp"
+                android:backgroundTint="#A6B2F2"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gestión de la ira"
+                        android:layout_marginBottom="8dp"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <TextView
+                        android:layout_width="270dp"
+                        android:layout_height="wrap_content"
+                        android:lineHeight="20sp"
+                        android:paddingRight="100dp"
+                        android:text="Técnicas para controlar emociones fuertes."
+                        android:textAppearance="?attr/textAppearanceBody2" />
+                </LinearLayout>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animIra"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    app:lottie_rawRes="@raw/dormir"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

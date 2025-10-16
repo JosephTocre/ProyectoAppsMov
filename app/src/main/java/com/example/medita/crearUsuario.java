@@ -40,8 +40,6 @@ public class crearUsuario extends AppCompatActivity {
         etConfirmaClave = findViewById(R.id.txtclave2);
         btnCrear = findViewById(R.id.btnCrear);
     }
-
-    // Método vinculado al botón mediante android:onClick="RegistrarUsuario"
     public void RegistrarUsuario(View view) {
         String nombres = etNombres.getText().toString().trim();
         String usuario = etUsuario.getText().toString().trim();
@@ -91,11 +89,9 @@ public class crearUsuario extends AppCompatActivity {
                 return params;
             }
         };
-
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
-
     public void MostrarLogin(View view) {
         startActivity(new Intent(this, Login.class));
         finish();

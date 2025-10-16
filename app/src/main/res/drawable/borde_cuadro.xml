@@ -3,12 +3,12 @@
     android:shape="rectangle">
 
     <!-- Color de fondo blanco -->
-    <solid android:color="@color/naranjaclaro"/>
+    <solid android:color="#FDECFC"/>
 
     <!-- Borde verde suave -->
     <stroke
-        android:width="1dp"
-        android:color="@color/black" />
+        android:width="2dp"
+        android:color="#673AB7" />
 
     <!-- Bordes redondeados -->
     <corners android:radius="12dp" />
