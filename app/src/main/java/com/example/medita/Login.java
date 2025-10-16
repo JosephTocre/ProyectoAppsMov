@@ -8,10 +8,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Login extends AppCompatActivity {
 
     EditText etUsuario, etClave;
-    DataBase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,26 +28,59 @@ public class Login extends AppCompatActivity {
 
         etUsuario = findViewById(R.id.etusuario);
         etClave = findViewById(R.id.etclave);
-        db = new DataBase(getApplicationContext(), "dbMedita", 1);
     }
 
     public void Acceder(View view) {
-        String usuario = etUsuario.getText().toString();
-        String clave = etClave.getText().toString();
+        String usuario = etUsuario.getText().toString().trim();
+        String clave = etClave.getText().toString().trim();
 
-        if (usuario.equals("") || clave.equals("")) {
+        if (usuario.isEmpty() || clave.isEmpty()) {
             Toast.makeText(this, "Ingrese usuario y clave", Toast.LENGTH_SHORT).show();
-        } else {
-            boolean acceso = db.Verificar_Acceso(usuario, clave);
-            if (acceso) {
-                Toast.makeText(this, "Acceso correcto", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, Inicio.class);
-                intent.putExtra("usuario", usuario);
-                startActivity(intent);
-                finish();
-            } else {
-                Toast.makeText(this, "Usuario o clave incorrectos", Toast.LENGTH_SHORT).show();
-            }
+            return;
+        }
+
+        // URL de tu archivo PHP
+        String url = "http://10.0.2.2/medita/login.php"; // Si usas emulador Android
+        // Si estás usando un celular físico conectado a la misma red Wi-Fi:
+        // reemplaza 10.0.2.2 por tu IP local, por ejemplo:
+        // String url = "http://192.168.1.5/medita/login.php";
+
+        try {
+            JSONObject json = new JSONObject();
+            json.put("usuario", usuario);
+            json.put("clave", clave);
+
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    json,
+                    response -> {
+                        try {
+                            if (response.getBoolean("success")) {
+                                Toast.makeText(this, response.getString("message"), Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(this, Inicio.class);
+                                intent.putExtra("usuario", response.getString("nombres"));
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(this, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(this, "Error procesando respuesta", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    error -> {
+                        Toast.makeText(this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+            );
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+            queue.add(request);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

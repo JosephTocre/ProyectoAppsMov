@@ -27,7 +27,7 @@
             android:layout_marginBottom="20dp"
 
             android:gravity="center"
-            android:hint="Nombre del Usuario"
+            android:hint="Nombre de usuario"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:paddingRight="15dp"
@@ -41,7 +41,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:hint="Password"
+            android:hint="Contraseña"
             android:inputType="textPassword"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"

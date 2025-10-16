@@ -9,11 +9,24 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class crearUsuario extends AppCompatActivity {
 
-    EditText etapellido, etusuario, etclave, etconfirmaclave;
+    EditText etNombres, etUsuario, etClave, etConfirmaClave;
     Button btnCrear;
-    DataBase db;
+    String URL_REGISTRO = "http://10.0.2.2/medita/registro.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,47 +34,70 @@ public class crearUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_crear_usuario);
         setTitle("Crear Usuario");
 
-        etapellido = findViewById(R.id.txtapellido);
-        etusuario = findViewById(R.id.txtusuario);
-        etclave = findViewById(R.id.txtclave1);
-        etconfirmaclave = findViewById(R.id.txtclave2);
+        etNombres = findViewById(R.id.txtapellido);
+        etUsuario = findViewById(R.id.txtusuario);
+        etClave = findViewById(R.id.txtclave1);
+        etConfirmaClave = findViewById(R.id.txtclave2);
         btnCrear = findViewById(R.id.btnCrear);
-        db = new DataBase(getApplicationContext(), "dbMedita", 1);
     }
 
+    // Método vinculado al botón mediante android:onClick="RegistrarUsuario"
     public void RegistrarUsuario(View view) {
-        String apellidos = etapellido.getText().toString();
-        String usuario = etusuario.getText().toString();
-        String clave = etclave.getText().toString();
-        String confirmacion = etconfirmaclave.getText().toString();
+        String nombres = etNombres.getText().toString().trim();
+        String usuario = etUsuario.getText().toString().trim();
+        String clave = etClave.getText().toString().trim();
+        String confirma = etConfirmaClave.getText().toString().trim();
 
-        if (apellidos.equals("") || usuario.equals("") || clave.equals("")) {
-            Toast.makeText(this, "No olvide ingresar todos los datos", Toast.LENGTH_SHORT).show();
-        } else {
-            if (clave.equals(confirmacion)) {
-                boolean verificar = db.VerifcarUsuarioIngresado(usuario);
-                if (verificar) {
-                    boolean insertar = db.RegistrarUsuario(apellidos, usuario, clave);
-                    if (insertar) {
-                        Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this, Login.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(this, "Error al registrar el usuario", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "El usuario ya se encuentra registrado", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(this, "Las claves no coinciden", Toast.LENGTH_SHORT).show();
-            }
+        if (nombres.isEmpty() || usuario.isEmpty() || clave.isEmpty() || confirma.isEmpty()) {
+            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        if (!clave.equals(confirma)) {
+            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StringRequest request = new StringRequest(Request.Method.POST, URL_REGISTRO,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            if (json.getBoolean("success")) {
+                                Toast.makeText(crearUsuario.this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(crearUsuario.this, Login.class));
+                                finish();
+                            } else {
+                                Toast.makeText(crearUsuario.this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(crearUsuario.this, "Error al procesar respuesta", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(crearUsuario.this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("nombres", nombres);
+                params.put("usuario", usuario);
+                params.put("clave", clave);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
     }
 
     public void MostrarLogin(View view) {
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
+        startActivity(new Intent(this, Login.class));
         finish();
     }
 }

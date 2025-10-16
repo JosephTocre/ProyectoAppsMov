@@ -4,48 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/naranjaclaro"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@color/fondo_meditacion"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvBienvenida"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido a tu espacio de meditación"
+        android:textColor="@color/texto_principal"
+        android:textSize="45dp"
+        android:fontFamily="@font/roboto_medium"
         android:gravity="center"
-        android:onClick="MostrarLogin"
-        android:orientation="vertical">
+        android:layout_marginBottom="0dp"
+        android:lineSpacingExtra="4dp"
+        android:alpha="1"
+        android:translationY="-20dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bienvenido a tu espacio de meditación"
-            android:textSize="45dp"
-            android:fontFamily="cursive"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            />
+    <FrameLayout
+        android:id="@+id/logoFrame"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginBottom="20dp"
+        android:clipToOutline="true"
+        android:elevation="8dp"
+        android:alpha="1"
+        android:translationY="20dp">
 
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/logoapps"
-            android:padding="10dp" />
-
-        <Button
-            android:id="@+id/btnIniciarSesion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/amarillo"
-            android:elevation="6dp"
-            android:onClick="MostrarLogin"
-            android:text="Iniciar Sesión"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:src="@drawable/logoapps"
+            android:contentDescription="Logo de la app"
+            android:scaleType="centerInside" />
+    </FrameLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:text="Iniciar Sesión"
+        android:textAllCaps="false"
+        android:textSize="30dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/texto_principal"
+        android:onClick="MostrarLogin"
+        android:elevation="6dp"
+        android:alpha="1"
+        android:translationY="30dp"
+        app:cornerRadius="35dp"
+        android:backgroundTint="@color/boton_meditacion"
+        app:rippleColor="@color/boton_ripple"/>
 </LinearLayout>

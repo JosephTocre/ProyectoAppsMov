@@ -6,4 +6,10 @@
     <color name="naranjaclaro">#fffaf0</color>
     <color name="amarillo">#ffde59</color>
 
+    <color name="fondo_meditacion">#E0F7FA</color>  <!-- azul pastel -->
+    <color name="boton_meditacion">#A8D5BA</color> <!-- verde menta -->
+    <color name="boton_ripple">#C8E6C9</color>     <!-- verde claro -->
+    <color name="texto_principal">#37474F</color>  <!-- gris oscuro -->
+
+
 </resources>
