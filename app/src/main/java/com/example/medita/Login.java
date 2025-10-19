@@ -17,9 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
-
     EditText etUsuario, etClave;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +27,6 @@ public class Login extends AppCompatActivity {
         etUsuario = findViewById(R.id.etusuario);
         etClave = findViewById(R.id.etclave);
     }
-
     public void Acceder(View view) {
         String usuario = etUsuario.getText().toString().trim();
         String clave = etClave.getText().toString().trim();
@@ -39,7 +36,6 @@ public class Login extends AppCompatActivity {
             return;
         }
         String url = "http://10.0.2.2/medita/login.php";
-
         try {
             JSONObject json = new JSONObject();
             json.put("usuario", usuario);
@@ -70,15 +66,12 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
             );
-
             RequestQueue queue = Volley.newRequestQueue(this);
             queue.add(request);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
     public void MostrarCrearUsuario(View view) {
         Intent intent = new Intent(this, crearUsuario.class);
         startActivity(intent);
