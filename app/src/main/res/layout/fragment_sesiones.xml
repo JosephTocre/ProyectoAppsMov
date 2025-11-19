@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SesionesFragment">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/breatheView"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_marginRight="-40dp"
+        android:layout_marginTop="-10dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/flor"
+        android:layout_gravity="right|top"
+        android:scaleX="-1"
+        tools:ignore="MissingConstraints"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Título de la categoría -->
+            <TextView
+                android:id="@+id/tvTituloCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Categoría"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Sección de Videos -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Videos de Meditación"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textStyle="bold" />
+
+            <!-- Lista de Videos -->
+            <LinearLayout
+                android:id="@+id/containerVideos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="32dp">
+
+                <!-- Video 1 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <!-- Miniatura del video -->
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:background="#E0E0E0"
+                            android:src="@drawable/ic_play"
+                            android:padding="16dp"
+                            android:layout_marginEnd="12dp"/>
+
+                        <!-- Información del video -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvTituloVideo1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Meditación Guiada 1"
+                                android:textAppearance="?attr/textAppearanceSubtitle1"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp"/>
+
+                            <TextView
+                                android:id="@+id/tvDuracionVideo1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="10 min"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="#666666"/>
+
+                            <TextView
+                                android:id="@+id/tvDescripcionVideo1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Descripción breve del video"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="#666666"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                        </LinearLayout>
+
+                        <!-- Icono de play -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_play"
+                            android:layout_gravity="center_vertical"
+                            app:tint="#666666" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Video 2 (Estructura similar) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:background="#E0E0E0"
+                            android:src="@drawable/ic_play"
+                            android:padding="16dp"
+                            android:layout_marginEnd="12dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvTituloVideo2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Meditación Guiada 2"
+                                android:textAppearance="?attr/textAppearanceSubtitle1"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp"/>
+
+                            <TextView
+                                android:id="@+id/tvDuracionVideo2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="15 min"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="#666666"/>
+
+                            <TextView
+                                android:id="@+id/tvDescripcionVideo2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Descripción breve del video"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="#666666"
+                                android:maxLines="1"
+                                android:ellipsize="end"/>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_play"
+                            android:layout_gravity="center_vertical"
+                            app:tint="#666666" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- Sección de Audios -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Audios de Meditación"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textStyle="bold" />
+
+            <!-- Lista de Audios -->
+            <LinearLayout
+                android:id="@+id/containerAudios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Audio 1 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <!-- Icono de audio -->
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_play"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="16dp"
+                            app:tint="#666666" />
+
+                        <!-- Información del audio -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvTituloAudio1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Meditación de Respiración"
+                                android:textAppearance="?attr/textAppearanceSubtitle1"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp"/>
+
+                            <TextView
+                                android:id="@+id/tvDuracionAudio1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="8 min"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="#666666"/>
+                        </LinearLayout>
+
+                        <!-- Icono de play -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_play"
+                            android:layout_gravity="center_vertical"
+                            app:tint="#666666" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Audio 2 (Estructura similar) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_play"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="16dp"
+                            app:tint="#666666" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tvTituloAudio2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Sonidos de Naturaleza"
+                                android:textAppearance="?attr/textAppearanceSubtitle1"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp"/>
+
+                            <TextView
+                                android:id="@+id/tvDuracionAudio2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="20 min"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="#666666"/>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_play"
+                            android:layout_gravity="center_vertical"
+                            app:tint="#666666" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
