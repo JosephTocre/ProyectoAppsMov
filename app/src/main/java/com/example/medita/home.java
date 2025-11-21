@@ -55,7 +55,6 @@ public class home extends Fragment {
         SesionesFragment fragment = SesionesFragment.newInstance(categoria, titulo);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-        // Limpiar el contenedor antes de añadir un fragmento nuevo
         FrameLayout container = getView().findViewById(R.id.fragment_home_container);
         container.removeAllViews();
 
@@ -67,7 +66,6 @@ public class home extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // Limpiar cualquier fragmento de sesión si volvemos al tab Home
         getChildFragmentManager().popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }

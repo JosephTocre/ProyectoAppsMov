@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ReproductorAudioActivity">
 
-    <!-- Imagen de fondo a pantalla completa -->
     <ImageView
         android:id="@+id/imgFondo"
         android:layout_width="match_parent"
@@ -14,13 +13,11 @@
         android:scaleType="centerCrop"
         android:src="@drawable/noche" />
 
-    <!-- Overlay oscuro -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#80000000" />
 
-    <!-- Botón de regresar -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegresar"
         android:layout_width="wrap_content"
@@ -39,7 +36,6 @@
         android:layout_gravity="top|start" />
 
 
-    <!-- Contenido principal centrado -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,7 +43,6 @@
         android:gravity="center"
         android:padding="32dp">
 
-        <!-- Título de la meditación -->
         <TextView
             android:id="@+id/tvTituloMeditacion"
             android:layout_width="wrap_content"
@@ -62,7 +57,6 @@
             android:shadowDy="3"
             android:shadowRadius="6" />
 
-        <!-- Controles de reproducción -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,7 +64,6 @@
             android:gravity="center"
             android:layout_marginBottom="40dp">
 
-            <!-- Botón retroceder 10 seg -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRetroceder"
                 android:layout_width="64dp"
@@ -83,7 +76,6 @@
                 android:backgroundTint="#30FFFFFF"
                 app:cornerRadius="32dp" />
 
-            <!-- Botón play/pause -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPlayPause"
                 android:layout_width="80dp"
@@ -95,7 +87,6 @@
                 android:backgroundTint="#60FFFFFF"
                 app:cornerRadius="40dp" />
 
-            <!-- Botón adelantar 10 seg -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAdelantar"
                 android:layout_width="64dp"
@@ -110,14 +101,12 @@
 
         </LinearLayout>
 
-        <!-- Contador de tiempo -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
 
-            <!-- Tiempo actual -->
             <TextView
                 android:id="@+id/tvTiempoActual"
                 android:layout_width="wrap_content"
@@ -130,7 +119,6 @@
                 android:shadowDy="2"
                 android:shadowRadius="4" />
 
-            <!-- Barra de progreso -->
             <com.google.android.material.slider.Slider
                 android:id="@+id/sliderProgreso"
                 android:layout_width="0dp"
@@ -146,7 +134,6 @@
                 app:thumbColor="#FFFFFF"
                 app:haloColor="#40FFFFFF" />
 
-            <!-- Duración total -->
             <TextView
                 android:id="@+id/tvDuracionTotal"
                 android:layout_width="wrap_content"

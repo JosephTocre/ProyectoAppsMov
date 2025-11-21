@@ -30,13 +30,11 @@ public class MyFirebaseService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
-        // Mensajes con data
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             handleNow();
         }
 
-        // Mensajes con notificación
         if (remoteMessage.getNotification() != null) {
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
@@ -50,7 +48,7 @@ public class MyFirebaseService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String title, String messageBody) {
-        if (title == null) title = "Nirvana"; // fallback si no viene título
+        if (title == null) title = "Nirvana";
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);

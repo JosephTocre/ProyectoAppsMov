@@ -16,7 +16,6 @@ public class ReproductorAudioActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     private boolean isPlaying = false;
 
-    // Views
     private ImageView imgFondo;
     private TextView tvTituloMeditacion;
     private MaterialButton btnRegresar;
@@ -27,7 +26,6 @@ public class ReproductorAudioActivity extends AppCompatActivity {
     private TextView tvTiempoActual;
     private TextView tvDuracionTotal;
 
-    // Datos del audio
     private String titulo;
     private int imagenRes;
     private int audioRes;
@@ -47,7 +45,6 @@ public class ReproductorAudioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reproductor_audio);
 
-        // Obtener datos del intent
         titulo = getIntent().getStringExtra("titulo");
         imagenRes = getIntent().getIntExtra("imagen", R.drawable.noche);
         audioRes = getIntent().getIntExtra("audio", 0);

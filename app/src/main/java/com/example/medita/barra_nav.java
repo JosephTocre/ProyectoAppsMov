@@ -14,7 +14,7 @@ public class barra_nav extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabs;
     private ViewPagerAdapter adapter;
-    private home homeFragment; // Referencia al Home original
+    private home homeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +26,9 @@ public class barra_nav extends AppCompatActivity {
 
         String nombreUsuario = getIntent().getStringExtra("usuario");
 
-        // Configurar el adapter del ViewPager
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        // Crear los fragmentos para los tabs
-        homeFragment = new home(); // Home original
+        homeFragment = new home();
         dormir dormirFragment = new dormir();
         logros logrosFragment = new logros();
         Bundle args = new Bundle();
@@ -39,26 +37,23 @@ public class barra_nav extends AppCompatActivity {
         dormirFragment.setArguments(args);
         logrosFragment.setArguments(args);
 
-        // Agregar fragmentos al adapter
         adapter.addFragment(homeFragment, "Inicio");
-        adapter.addFragment(dormirFragment, "Sueño"); // ejemplo de tab extra
+        adapter.addFragment(dormirFragment, "Sueño");
         adapter.addFragment(logrosFragment, "Trofeos");
-        adapter.addFragment(new home(), "Reportes"); // otro ejemplo
+        adapter.addFragment(new home(), "Reportes");
 
         viewPager.setAdapter(adapter);
         tabs.setupWithViewPager(viewPager);
 
-        // Configurar iconos
         if (tabs.getTabAt(0) != null) tabs.getTabAt(0).setIcon(R.drawable.home);
         if (tabs.getTabAt(1) != null) tabs.getTabAt(1).setIcon(R.drawable.dream);
         if (tabs.getTabAt(2) != null) tabs.getTabAt(2).setIcon(R.drawable.trofeonav);
         if (tabs.getTabAt(3) != null) tabs.getTabAt(3).setIcon(R.drawable.reportes);
 
-        // Listener para que al volver a Home se borre cualquier SesionesFragment
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) { // Home
+                if (tab.getPosition() == 0) {
                     Fragment current = getSupportFragmentManager().findFragmentById(R.id.fragment_home_container);
                     if (current != null && !(current instanceof home)) {
                         getSupportFragmentManager().beginTransaction()
@@ -75,8 +70,6 @@ public class barra_nav extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         });
     }
-
-    // Método público que Home llama para abrir SesionesFragment
     public void mostrarSesionesFragment(String categoria, String titulo) {
         SesionesFragment fragment = SesionesFragment.newInstance(categoria, titulo);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
