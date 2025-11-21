@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,8 +26,7 @@ import java.util.Map;
 public class crearUsuario extends AppCompatActivity {
 
     EditText etNombres, etUsuario, etClave, etConfirmaClave;
-    Button btnCrear;
-    String URL_REGISTRO = "http://192.168.1.36/medita/registro.php";
+    private final String URL_REGISTRO = "http://192.168.18.189/medita/registro.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,6 @@ public class crearUsuario extends AppCompatActivity {
         etUsuario = findViewById(R.id.txtusuario);
         etClave = findViewById(R.id.txtclave1);
         etConfirmaClave = findViewById(R.id.txtclave2);
-        btnCrear = findViewById(R.id.btnCrear);
     }
 
     public void RegistrarUsuario(View view) {
@@ -61,32 +58,26 @@ public class crearUsuario extends AppCompatActivity {
 
         Toast.makeText(this, "Registrando...", Toast.LENGTH_SHORT).show();
 
-        // CAMBIO PRINCIPAL: Usar StringRequest en lugar de JsonObjectRequest
         StringRequest request = new StringRequest(Request.Method.POST, URL_REGISTRO,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("REGISTRO", "Respuesta: " + response);
-                        try {
-                            JSONObject json = new JSONObject(response);
-                            if (json.getBoolean("success")) {
-                                Toast.makeText(crearUsuario.this, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(crearUsuario.this, Login.class));
-                                finish();
-                            } else {
-                                Toast.makeText(crearUsuario.this, json.getString("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(crearUsuario.this, "Error al procesar respuesta", Toast.LENGTH_SHORT).show();
+                response -> {
+                    Log.d("REGISTRO", "Respuesta: " + response);
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        if (json.getBoolean("success")) {
+                            Toast.makeText(crearUsuario.this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(crearUsuario.this, Login.class));
+                            finish();
+                        } else {
+                            Toast.makeText(crearUsuario.this, json.getString("message"), Toast.LENGTH_SHORT).show();
                         }
+                    } catch (JSONException e) {
+                        Toast.makeText(crearUsuario.this, "Error al procesar respuesta", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("REGISTRO", "Error: " + error.toString());
-                        Toast.makeText(crearUsuario.this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+                error -> {
+                    Log.e("REGISTRO", "Error: " + error.toString());
+                    Toast.makeText(crearUsuario.this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 }) {
             @Override
             protected Map<String, String> getParams() {
@@ -96,16 +87,10 @@ public class crearUsuario extends AppCompatActivity {
                 params.put("clave", clave);
                 return params;
             }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/x-www-form-urlencoded; charset=UTF-8";
-            }
         };
 
-        // Agregar política de reintentos
         request.setRetryPolicy(new DefaultRetryPolicy(
-                15000, // 15 segundos timeout
+                15000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));

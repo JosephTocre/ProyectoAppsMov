@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".home">
 
+    <!-- Contenedor para SesionesFragment -->
+    <FrameLayout
+        android:id="@+id/fragment_home_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/breatheView"
         android:layout_width="wrap_content"
@@ -265,4 +272,5 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>
+    </FrameLayout>
 </FrameLayout>

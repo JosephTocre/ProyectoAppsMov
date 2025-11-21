@@ -1,16 +1,23 @@
 <?php
-include 'conexion.php';
+// categorias.php
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
+require_once 'conexion.php';
 
-$query = "SELECT * FROM categorias";
-$resultado = mysqli_query($conexion, $query);
+$query = "SELECT id_categoria, nombre_categoria FROM categorias ORDER BY id_categoria";
+$resultado = $conexion->query($query);
 
-$categorias = array();
+$categorias = [];
 
-while ($fila = mysqli_fetch_assoc($resultado)) {
-    $categorias[] = $fila;
+if ($resultado) {
+    while ($fila = $resultado->fetch_assoc()) {
+        $categorias[] = $fila;
+    }
+    echo json_encode($categorias, JSON_UNESCAPED_UNICODE);
+} else {
+    http_response_code(500);
+    echo json_encode(["success" => false, "message" => "Error en la consulta: " . $conexion->error]);
 }
 
-echo json_encode($categorias);
-
-mysqli_close($conexion);
+$conexion->close();
 ?>

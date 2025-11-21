@@ -1,51 +1,63 @@
 <?php
+// login.php
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
 
-$servername = "localhost";
-$username = "root";
-$password = "1234";
-$dbname = "dbmedita";
+require_once 'conexion.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// ACEPTAR FORM-DATA (lo que envía Android con StringRequest)
+$usuario = trim($_POST['usuario'] ?? '');
+$clave = trim($_POST['clave'] ?? '');
 
-if ($conn->connect_error) {
-    echo json_encode(["success" => false, "message" => "Error de conexión: " . $conn->connect_error]);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(["success" => false, "message" => "Método no permitido"]);
     exit;
 }
 
-$input = json_decode(file_get_contents("php://input"), true);
-$usuario = trim($input["usuario"] ?? "");
-$clave = trim($input["clave"] ?? "");
-
-if ($usuario === "" || $clave === "") {
+if ($usuario === '' || $clave === '') {
+    http_response_code(400);
     echo json_encode(["success" => false, "message" => "Faltan datos"]);
     exit;
 }
 
-$stmt = $conn->prepare("SELECT clave, nombres FROM usuarios WHERE usuario = ?");
+// Preparar consulta
+$stmt = $conexion->prepare("SELECT id_usuario, clave, nombres FROM usuarios WHERE usuario = ?");
+if (!$stmt) {
+    http_response_code(500);
+    echo json_encode(["success" => false, "message" => "Error en la consulta: " . $conexion->error]);
+    exit;
+}
+
 $stmt->bind_param("s", $usuario);
 $stmt->execute();
 $stmt->store_result();
 
-if ($stmt->num_rows > 0) {
-    $stmt->bind_result($hash_clave, $nombres);
-    $stmt->fetch();
-
-    if (password_verify($clave, $hash_clave)) {
-        echo json_encode([
-            "success" => true,
-            "message" => "Acceso correcto",
-            "usuario" => $usuario,
-            "nombres" => $nombres
-        ]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Contraseña incorrecta"]);
-    }
-} else {
+if ($stmt->num_rows === 0) {
     echo json_encode(["success" => false, "message" => "Usuario no encontrado"]);
+    $stmt->close();
+    $conexion->close();
+    exit;
+}
+
+$stmt->bind_result($id_usuario, $hash_clave, $nombres);
+$stmt->fetch();
+
+// Verificar contraseña
+if (password_verify($clave, $hash_clave)) {
+    echo json_encode([
+        "success" => true,
+        "message" => "Acceso correcto",
+        "id_usuario" => $id_usuario,
+        "usuario" => $usuario,
+        "nombres" => $nombres
+    ], JSON_UNESCAPED_UNICODE);
+} else {
+    echo json_encode(["success" => false, "message" => "Contraseña incorrecta"]);
 }
 
 $stmt->close();
-$conn->close();
+$conexion->close();
 ?>
-

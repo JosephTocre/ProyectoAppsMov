@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication8">
         <activity
+            android:name=".dormir"
+            android:exported="false" />
+        <activity
             android:name=".barra_nav"
             android:exported="false" />
         <activity
