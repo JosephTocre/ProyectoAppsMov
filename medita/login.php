@@ -7,23 +7,46 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 require_once 'conexion.php';
 
-// ACEPTAR FORM-DATA (lo que envía Android con StringRequest)
-$usuario = trim($_POST['usuario'] ?? '');
-$clave = trim($_POST['clave'] ?? '');
-
+// --------------------------------------------
+// ASEGURAR QUE SEA POST
+// --------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(["success" => false, "message" => "Método no permitido"]);
     exit;
 }
 
-if ($usuario === '' || $clave === '') {
+// --------------------------------------------
+// RECIBIR DATOS (form-data o x-www-form-urlencoded)
+// --------------------------------------------
+$usuario = $_POST['usuario'] ?? null;
+$clave   = $_POST['clave'] ?? null;
+
+// --------------------------------------------
+// SI VIENE JSON → LEERLO TAMBIÉN
+// --------------------------------------------
+if ($usuario === null || $clave === null) {
+    $inputJSON = file_get_contents("php://input");
+    $json = json_decode($inputJSON, true);
+
+    if (is_array($json)) {
+        $usuario = $json['usuario'] ?? null;
+        $clave   = $json['clave'] ?? null;
+    }
+}
+
+// --------------------------------------------
+// VALIDAR CAMPOS VACÍOS
+// --------------------------------------------
+if (empty($usuario) || empty($clave)) {
     http_response_code(400);
     echo json_encode(["success" => false, "message" => "Faltan datos"]);
     exit;
 }
 
-// Preparar consulta
+// --------------------------------------------
+// CONSULTA A BASE DE DATOS
+// --------------------------------------------
 $stmt = $conexion->prepare("SELECT id_usuario, clave, nombres FROM usuarios WHERE usuario = ?");
 if (!$stmt) {
     http_response_code(500);
@@ -45,7 +68,9 @@ if ($stmt->num_rows === 0) {
 $stmt->bind_result($id_usuario, $hash_clave, $nombres);
 $stmt->fetch();
 
-// Verificar contraseña
+// --------------------------------------------
+// VERIFICACIÓN DE CONTRASEÑA
+// --------------------------------------------
 if (password_verify($clave, $hash_clave)) {
     echo json_encode([
         "success" => true,
