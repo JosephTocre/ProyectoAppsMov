@@ -31,15 +31,17 @@ public class barra_nav extends AppCompatActivity {
 
         // Crear los fragmentos para los tabs
         homeFragment = new home(); // Home original
+        dormir dormirFragment = new dormir();
         logros logrosFragment = new logros();
         Bundle args = new Bundle();
         args.putString("usuario", nombreUsuario);
         homeFragment.setArguments(args);
+        dormirFragment.setArguments(args);
         logrosFragment.setArguments(args);
 
         // Agregar fragmentos al adapter
         adapter.addFragment(homeFragment, "Inicio");
-        adapter.addFragment(new home(), "Sueño"); // ejemplo de tab extra
+        adapter.addFragment(dormirFragment, "Sueño"); // ejemplo de tab extra
         adapter.addFragment(logrosFragment, "Trofeos");
         adapter.addFragment(new home(), "Reportes"); // otro ejemplo
 

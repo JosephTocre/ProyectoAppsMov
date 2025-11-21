@@ -1,64 +1,83 @@
 package com.example.medita;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import com.google.android.material.card.MaterialCardView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link dormir#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class dormir extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public dormir() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment dormir.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static dormir newInstance(String param1, String param2) {
-        dormir fragment = new dormir();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_dormir, container, false);
+
+        // Configurar saludo del usuario
+        configurarSaludo(view);
+
+        // Configurar los clicks en las cards
+        configurarClicks(view);
+
+        return view;
+    }
+
+    private void configurarSaludo(View view) {
+        TextView tvSaludo = view.findViewById(R.id.tvSaludo);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String nombreUsuario = bundle.getString("usuario");
+            if (nombreUsuario != null) {
+                tvSaludo.setText("A dormir, " + nombreUsuario);
+            }
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dormir, container, false);
+    private void configurarClicks(View view) {
+        MaterialCardView cardNoche = view.findViewById(R.id.cardNoche);
+        MaterialCardView cardCascada = view.findViewById(R.id.cardCascada);
+        MaterialCardView cardPlaya = view.findViewById(R.id.cardPlaya);
+        MaterialCardView cardPaz = view.findViewById(R.id.cardPaz);
+
+        // Noche estrellada
+        cardNoche.setOnClickListener(v ->
+                navegarAReproductor("Noche estrellada",
+                        R.drawable.noche,
+                        R.raw.noche_estrellada));
+
+        // Cascada
+        cardCascada.setOnClickListener(v ->
+                navegarAReproductor("Cascada",
+                        R.drawable.cascada,
+                        R.raw.cascada));
+
+        // Playa
+        cardPlaya.setOnClickListener(v ->
+                navegarAReproductor("Playa",
+                        R.drawable.playa,
+                        R.raw.playa));
+
+        // Paz de sabiduría
+        cardPaz.setOnClickListener(v ->
+                navegarAReproductor("Paz de sabiduría",
+                        R.drawable.paz,
+                        R.raw.paz_sabiduria));
+    }
+
+    private void navegarAReproductor(String titulo, int imagenRes, int audioRes) {
+        Intent intent = new Intent(getActivity(), ReproductorAudioActivity.class);
+        intent.putExtra("titulo", titulo);
+        intent.putExtra("imagen", imagenRes);
+        intent.putExtra("audio", audioRes);
+        startActivity(intent);
     }
 }

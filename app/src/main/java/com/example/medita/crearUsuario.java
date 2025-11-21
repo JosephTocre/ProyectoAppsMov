@@ -26,7 +26,7 @@ import java.util.Map;
 public class crearUsuario extends AppCompatActivity {
 
     EditText etNombres, etUsuario, etClave, etConfirmaClave;
-    private final String URL_REGISTRO = "http://192.168.18.189/medita/registro.php";
+    private final String URL_REGISTRO = "http://192.168.1.36/medita/registro.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

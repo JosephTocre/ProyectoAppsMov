@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReproductorAudioActivity">
+
+    <!-- Imagen de fondo a pantalla completa -->
+    <ImageView
+        android:id="@+id/imgFondo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/noche" />
+
+    <!-- Overlay oscuro -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000" />
+
+    <!-- Botón de regresar -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="60dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:icon="@drawable/ic_arrow_back"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconTint="@color/white"
+        android:backgroundTint="#40000000"
+        android:textColor="@color/white"
+        android:text="Regresar"
+        android:layout_gravity="top|start" />
+
+
+    <!-- Contenido principal centrado -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp">
+
+        <!-- Título de la meditación -->
+        <TextView
+            android:id="@+id/tvTituloMeditacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sueño Profundo"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="40dp"
+            android:shadowColor="#000000"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="6" />
+
+        <!-- Controles de reproducción -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="40dp">
+
+            <!-- Botón retroceder 10 seg -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRetroceder"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="24dp"
+                app:icon="@drawable/ic_replay_10"
+                app:iconGravity="textStart"
+                app:iconSize="32dp"
+                app:iconTint="@color/white"
+                android:backgroundTint="#30FFFFFF"
+                app:cornerRadius="32dp" />
+
+            <!-- Botón play/pause -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPlayPause"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:icon="@drawable/ic_play"
+                app:iconGravity="textStart"
+                app:iconSize="40dp"
+                app:iconTint="@color/white"
+                android:backgroundTint="#60FFFFFF"
+                app:cornerRadius="40dp" />
+
+            <!-- Botón adelantar 10 seg -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAdelantar"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="24dp"
+                app:icon="@drawable/ic_forward_10"
+                app:iconGravity="textStart"
+                app:iconSize="32dp"
+                app:iconTint="@color/white"
+                android:backgroundTint="#30FFFFFF"
+                app:cornerRadius="32dp" />
+
+        </LinearLayout>
+
+        <!-- Contador de tiempo -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Tiempo actual -->
+            <TextView
+                android:id="@+id/tvTiempoActual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
+
+            <!-- Barra de progreso -->
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderProgreso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:valueFrom="0"
+                android:valueTo="100"
+                android:value="0"
+                app:trackColorInactive="#60FFFFFF"
+                app:trackColorActive="#FFFFFF"
+                app:thumbColor="#FFFFFF"
+                app:haloColor="#40FFFFFF" />
+
+            <!-- Duración total -->
+            <TextView
+                android:id="@+id/tvDuracionTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
