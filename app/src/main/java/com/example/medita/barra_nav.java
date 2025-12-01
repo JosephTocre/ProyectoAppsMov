@@ -31,16 +31,18 @@ public class barra_nav extends AppCompatActivity {
         homeFragment = new home();
         dormir dormirFragment = new dormir();
         logros logrosFragment = new logros();
+        fragment_reports reportesFragment = new fragment_reports();
         Bundle args = new Bundle();
         args.putString("usuario", nombreUsuario);
         homeFragment.setArguments(args);
         dormirFragment.setArguments(args);
         logrosFragment.setArguments(args);
+        reportesFragment.setArguments(args);
 
         adapter.addFragment(homeFragment, "Inicio");
         adapter.addFragment(dormirFragment, "Sueño");
         adapter.addFragment(logrosFragment, "Trofeos");
-        adapter.addFragment(new home(), "Reportes");
+        adapter.addFragment(reportesFragment, "Reportes");
 
         viewPager.setAdapter(adapter);
         tabs.setupWithViewPager(viewPager);

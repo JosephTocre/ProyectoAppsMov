@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.0")
     implementation("com.airbnb.android:lottie:6.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
     implementation("com.google.firebase:firebase-analytics")

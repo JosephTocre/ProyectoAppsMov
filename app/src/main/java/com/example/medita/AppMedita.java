@@ -34,7 +34,7 @@ public class AppMedita extends Application {
         iniciarContadorTiempo();
     }
 
-    private void verificarRachaDiaria() {
+    public void verificarRachaDiaria() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         long ultimoAcceso = prefs.getLong(KEY_ULTIMO_ACCESO, 0);
 
@@ -63,14 +63,20 @@ public class AppMedita extends Application {
             actualizarRacha = true;
         } // else: mismo día, no incrementa
 
+        // --- Desplazar historial de los últimos 7 días ---
         if (actualizarRacha) {
-            prefs.edit()
-                    .putInt(KEY_RACHA_DIARIA, rachaDiaria)
-                    .putLong(KEY_ULTIMO_ACCESO, System.currentTimeMillis())
-                    .apply();
+            SharedPreferences.Editor editor = prefs.edit();
+            for (int i = 6; i > 0; i--) {
+                editor.putInt("tiempo_dia_" + i, prefs.getInt("tiempo_dia_" + (i - 1), 0));
+                editor.putInt("racha_dia_" + i, prefs.getInt("racha_dia_" + (i - 1), 0));
+            }
+            editor.putInt("tiempo_dia_0", 0); // iniciar tiempo de hoy en 0
+            editor.putInt("racha_dia_0", rachaDiaria);
+            editor.putInt(KEY_RACHA_DIARIA, rachaDiaria);
+            editor.putLong(KEY_ULTIMO_ACCESO, System.currentTimeMillis());
+            editor.apply();
         }
     }
-
 
     private void iniciarContadorTiempo() {
         contadorRunnable = new Runnable() {
@@ -89,9 +95,11 @@ public class AppMedita extends Application {
 
     private void guardarTiempo() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        prefs.edit()
-                .putLong(KEY_TIEMPO_TOTAL_SEGUNDOS, tiempoSegundos)
-                .apply();
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(KEY_TIEMPO_TOTAL_SEGUNDOS, tiempoSegundos);
+        // Guardar tiempo de hoy en minutos
+        editor.putInt("tiempo_dia_0", (int)(tiempoSegundos / 60));
+        editor.apply();
     }
 
     public long getTiempoMinutos() {
