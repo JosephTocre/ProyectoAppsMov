@@ -69,6 +69,7 @@
                 android:layout_marginBottom="32dp">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/videomedi1"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginBottom="12dp"
@@ -137,6 +138,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/videomedi2"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginBottom="12dp"
@@ -221,6 +223,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/audio1"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginBottom="12dp"
@@ -278,6 +281,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/audio2"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginBottom="12dp"

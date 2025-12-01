@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication8">
         <activity
+            android:name=".activity_audio_medita"
+            android:exported="false" />
+        <activity
+            android:name=".activity_reproductor_video"
+            android:exported="false" />
+        <activity
             android:name=".activity_sesiones"
             android:exported="false" />
         <activity
