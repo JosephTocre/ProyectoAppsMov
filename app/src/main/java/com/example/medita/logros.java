@@ -1,7 +1,5 @@
 package com.example.medita;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,27 +28,33 @@ public class logros extends Fragment {
         valRacha = view.findViewById(R.id.val_meditate);
         valTiempo = view.findViewById(R.id.val_meditate_times);
 
-        // Obtener nombre del usuario desde SharedPreferences
-        SharedPreferences prefs = getActivity().getSharedPreferences("prefs_app", Context.MODE_PRIVATE);
-        String nombreUsuario = prefs.getString("nombre_usuario", "Usuario");
-        tvSaludo.setText("Hola, " + nombreUsuario);
+        Bundle bundle = getArguments();
+        String nombreUsuario = "Usuario";
+        if (bundle != null) {
+            String nombreBundle = bundle.getString("usuario");
+            if (nombreBundle != null && !nombreBundle.isEmpty()) {
+                nombreUsuario = nombreBundle;
+            }
+        }
 
-        // Actualizar logros
+        tvSaludo.setText("Estos son tu avances, " + nombreUsuario);
+
         actualizarLogros();
 
         return view;
     }
 
     private void actualizarLogros() {
-        SharedPreferences prefs = getActivity().getSharedPreferences("prefs_app", getActivity().MODE_PRIVATE);
+        Bundle bundle = getArguments();
+        long tiempoMinutos = 0;
+        int racha = 0;
 
-        // Tiempo total en segundos
-        long tiempoSegundos = prefs.getLong("tiempo_total_segundos", 0);
-        long tiempoMinutos = tiempoSegundos / 60;
+        if (bundle != null) {
+            tiempoMinutos = bundle.getLong("tiempo_total_minutos", 0);
+            racha = bundle.getInt("racha_diaria", 0);
+        }
+
         valTiempo.setText(tiempoMinutos + " minutos");
-
-        // Racha diaria (días consecutivos)
-        int racha = prefs.getInt("racha_diaria", 0);
 
         String nivel;
         if (racha >= 30) {
@@ -65,4 +69,5 @@ public class logros extends Fragment {
 
         valRacha.setText(nivel);
     }
+
 }
