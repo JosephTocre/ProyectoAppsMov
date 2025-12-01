@@ -1,76 +1,59 @@
 package com.example.medita;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.view.WindowInsetsController;
-import android.widget.VideoView;
-import android.widget.MediaController;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 public class activity_reproductor_video extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_reproductor_video);
-
-        hideSystemBars();
 
         MaterialButton btnRegresar = findViewById(R.id.btnRegresarVideo);
         btnRegresar.setOnClickListener(v -> finish());
 
-        String titulo = getIntent().getStringExtra("tituloVideo");
-        if (titulo != null) {
-            findViewById(R.id.tvTituloVideo);
-        }
+        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
+        getLifecycle().addObserver(youTubePlayerView);
 
-        VideoView videoView = findViewById(R.id.videoView);
+        String urlVideo = getIntent().getStringExtra("urlVideo");
+        String videoId = extractYoutubeId(urlVideo);
 
-        String nombreVideo = getIntent().getStringExtra("nombreVideo");
-
-        int idVideo = getResources().getIdentifier(
-                nombreVideo,
-                "raw",
-                getPackageName()
-        );
-
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + idVideo);
-        videoView.setVideoURI(uri);
-
-        MediaController controller = new MediaController(this);
-        controller.setAnchorView(videoView);
-        videoView.setMediaController(controller);
-
-        videoView.start();
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(YouTubePlayer youTubePlayer) {
+                if (videoId != null) {
+                    youTubePlayer.loadVideo(videoId, 0);
+                }
+            }
+        });
     }
 
-    private void hideSystemBars() {
-        final View decorView = getWindow().getDecorView();
 
-        decorView.setOnSystemUiVisibilityChangeListener(visibility -> {
-            decorView.setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            );
-        });
+    // Método simple para extraer ID de YouTube
+    private String extractYoutubeId(String url) {
+        if (url == null) return null;
 
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        );
+        if (url.contains("youtu.be/")) {
+            return url.substring(url.lastIndexOf("/") + 1);
+        }
+
+        if (url.contains("youtube.com/watch?v=")) {
+            String[] split = url.split("v=");
+            if (split.length > 1) {
+                String id = split[1];
+                int ampersand = id.indexOf("&");
+                if (ampersand != -1) id = id.substring(0, ampersand);
+                return id;
+            }
+        }
+
+        return null;
     }
 }

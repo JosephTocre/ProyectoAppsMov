@@ -30,18 +30,16 @@ public class activity_audio_medita extends AppCompatActivity {
         tvTiempoTotal = findViewById(R.id.tvTiempoTotal);
         tvTituloAudio = findViewById(R.id.tvTituloAudio);
 
-        int audioResId = getIntent().getIntExtra("audioResId", -1);
+        String audioResName = getIntent().getStringExtra("urlAudio");
         String titulo = getIntent().getStringExtra("tituloAudio");
 
-        if (titulo != null) {
-            tvTituloAudio.setText(titulo);
-        }
+        if (titulo != null) tvTituloAudio.setText(titulo);
 
+        int audioResId = getResources().getIdentifier(audioResName, "raw", getPackageName());
         mediaPlayer = MediaPlayer.create(this, audioResId);
-        mediaPlayer.setOnPreparedListener(mp -> {
-            seekBar.setMax(mp.getDuration());
-            tvTiempoTotal.setText(formatoTiempo(mp.getDuration()));
-        });
+
+        seekBar.setMax(mediaPlayer.getDuration());
+        tvTiempoTotal.setText(formatoTiempo(mediaPlayer.getDuration()));
 
         btnPlayPause.setOnClickListener(v -> {
             if (mediaPlayer.isPlaying()) {
@@ -57,7 +55,7 @@ public class activity_audio_medita extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
+                if (fromUser && mediaPlayer != null) {
                     mediaPlayer.seekTo(progress);
                     tvTiempoActual.setText(formatoTiempo(progress));
                 }

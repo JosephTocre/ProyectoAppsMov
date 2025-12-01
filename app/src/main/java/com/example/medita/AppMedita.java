@@ -14,7 +14,7 @@ public class AppMedita extends Application {
     private static final String KEY_ULTIMO_ACCESO = "ultimo_acceso";
     private static final String KEY_RACHA_DIARIA = "racha_diaria";
 
-    private long tiempoSegundos = 0; // usar long por si pasa mucho tiempo
+    private long tiempoSegundos = 0; 
     private int rachaDiaria = 0;
 
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -24,7 +24,6 @@ public class AppMedita extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Cargar datos guardados
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         tiempoSegundos = prefs.getLong(KEY_TIEMPO_TOTAL_SEGUNDOS, 0);
         rachaDiaria = prefs.getInt(KEY_RACHA_DIARIA, 0);
@@ -34,7 +33,7 @@ public class AppMedita extends Application {
         iniciarContadorTiempo();
     }
 
-    private void verificarRachaDiaria() {
+    public void verificarRachaDiaria() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         long ultimoAcceso = prefs.getLong(KEY_ULTIMO_ACCESO, 0);
 
@@ -50,38 +49,39 @@ public class AppMedita extends Application {
         boolean actualizarRacha = false;
 
         if (ultimoAcceso == 0) {
-            // Primera vez que abre la app
             rachaDiaria = 1;
             actualizarRacha = true;
         } else if (yearHoy != yearUltimo || diaHoy - diaUltimo > 1) {
-            // Se perdió la racha
             rachaDiaria = 1;
             actualizarRacha = true;
         } else if (diaHoy - diaUltimo == 1) {
-            // Incrementa la racha
             rachaDiaria++;
             actualizarRacha = true;
-        } // else: mismo día, no incrementa
+        }
 
         if (actualizarRacha) {
-            prefs.edit()
-                    .putInt(KEY_RACHA_DIARIA, rachaDiaria)
-                    .putLong(KEY_ULTIMO_ACCESO, System.currentTimeMillis())
-                    .apply();
+            SharedPreferences.Editor editor = prefs.edit();
+            for (int i = 6; i > 0; i--) {
+                editor.putInt("tiempo_dia_" + i, prefs.getInt("tiempo_dia_" + (i - 1), 0));
+                editor.putInt("racha_dia_" + i, prefs.getInt("racha_dia_" + (i - 1), 0));
+            }
+            editor.putInt("tiempo_dia_0", 0);
+            editor.putInt("racha_dia_0", rachaDiaria);
+            editor.putInt(KEY_RACHA_DIARIA, rachaDiaria);
+            editor.putLong(KEY_ULTIMO_ACCESO, System.currentTimeMillis());
+            editor.apply();
         }
     }
-
 
     private void iniciarContadorTiempo() {
         contadorRunnable = new Runnable() {
             @Override
             public void run() {
                 tiempoSegundos++;
-                // Guardar cada 60 segundos
                 if (tiempoSegundos % 60 == 0) {
                     guardarTiempo();
                 }
-                handler.postDelayed(this, 1000); // cada segundo
+                handler.postDelayed(this, 1000);
             }
         };
         handler.post(contadorRunnable);
@@ -89,9 +89,10 @@ public class AppMedita extends Application {
 
     private void guardarTiempo() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        prefs.edit()
-                .putLong(KEY_TIEMPO_TOTAL_SEGUNDOS, tiempoSegundos)
-                .apply();
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(KEY_TIEMPO_TOTAL_SEGUNDOS, tiempoSegundos);
+        editor.putInt("tiempo_dia_0", (int)(tiempoSegundos / 60));
+        editor.apply();
     }
 
     public long getTiempoMinutos() {
