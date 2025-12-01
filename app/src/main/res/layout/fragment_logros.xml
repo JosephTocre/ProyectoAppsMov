@@ -181,7 +181,7 @@
                             android:id="@+id/val_breathe"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="10"
+                            android:text="7"
                             android:textStyle="bold"
                             android:textColor="#FF5722"
                             android:textSize="28sp" />
@@ -228,7 +228,7 @@
                             android:id="@+id/val_breathe_times"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="23"
+                            android:text="4"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textColor="#673AB7"
                             android:textStyle="bold"
