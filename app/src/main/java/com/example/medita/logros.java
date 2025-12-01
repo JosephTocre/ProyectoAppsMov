@@ -40,6 +40,7 @@ public class logros extends Fragment {
         valRacha = view.findViewById(R.id.val_meditate);
         valTiempo = view.findViewById(R.id.val_meditate_times);
 
+        // Obtener nombre de usuario desde Bundle si existe
         String nombreUsuario = "Usuario";
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -51,6 +52,7 @@ public class logros extends Fragment {
 
         tvSaludo.setText("Estos son tus avances, " + nombreUsuario);
 
+        // Iniciar actualización en tiempo real
         iniciarActualizacionEnTiempoReal();
 
         return view;
@@ -62,7 +64,7 @@ public class logros extends Fragment {
             public void run() {
                 verificarNuevoDia();
                 actualizarLogros();
-                handler.postDelayed(this, 1000);
+                handler.postDelayed(this, 1000); // cada segundo
             }
         };
         handler.post(actualizarRunnable);
