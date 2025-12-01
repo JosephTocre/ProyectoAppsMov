@@ -54,8 +54,8 @@
             android:textSize="26sp"
             android:textStyle="bold" />
 
-        <VideoView
-            android:id="@+id/videoView"
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_marginBottom="32dp" />
