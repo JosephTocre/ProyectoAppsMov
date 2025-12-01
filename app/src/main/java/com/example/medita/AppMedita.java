@@ -59,6 +59,7 @@ public class AppMedita extends Application {
             actualizarRacha = true;
         }
 
+        // --- Desplazar historial de los últimos 7 días ---
         if (actualizarRacha) {
             SharedPreferences.Editor editor = prefs.edit();
             for (int i = 6; i > 0; i--) {
@@ -91,6 +92,7 @@ public class AppMedita extends Application {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putLong(KEY_TIEMPO_TOTAL_SEGUNDOS, tiempoSegundos);
+        // Guardar tiempo de hoy en minutos
         editor.putInt("tiempo_dia_0", (int)(tiempoSegundos / 60));
         editor.apply();
     }
