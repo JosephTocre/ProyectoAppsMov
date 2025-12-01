@@ -24,14 +24,12 @@ public class activity_audio_medita extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_medita);
 
-        // Referencias UI
         btnPlayPause = findViewById(R.id.btnPlayPause);
         seekBar = findViewById(R.id.seekBarAudio);
         tvTiempoActual = findViewById(R.id.tvTiempoActual);
         tvTiempoTotal = findViewById(R.id.tvTiempoTotal);
         tvTituloAudio = findViewById(R.id.tvTituloAudio);
 
-        // Recibir datos
         int audioResId = getIntent().getIntExtra("audioResId", -1);
         String titulo = getIntent().getStringExtra("tituloAudio");
 
@@ -39,14 +37,12 @@ public class activity_audio_medita extends AppCompatActivity {
             tvTituloAudio.setText(titulo);
         }
 
-        // Inicializar MediaPlayer
         mediaPlayer = MediaPlayer.create(this, audioResId);
         mediaPlayer.setOnPreparedListener(mp -> {
             seekBar.setMax(mp.getDuration());
             tvTiempoTotal.setText(formatoTiempo(mp.getDuration()));
         });
 
-        // Botón Play/Pause
         btnPlayPause.setOnClickListener(v -> {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.pause();
@@ -58,7 +54,6 @@ public class activity_audio_medita extends AppCompatActivity {
             }
         });
 
-        // Mover SeekBar manualmente
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -72,7 +67,6 @@ public class activity_audio_medita extends AppCompatActivity {
             @Override public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        // Botón regresar
         findViewById(R.id.btnRegresarAudio).setOnClickListener(v -> finish());
     }
 
