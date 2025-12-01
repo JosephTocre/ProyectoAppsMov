@@ -23,7 +23,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 
     EditText etUsuario, etClave;
-    private final String URL_LOGIN = "http://192.168.100.3/medita/login.php";
+    private final String URL_LOGIN = "http://appnirvana.myartsonline.com/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,14 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, "Error procesando respuesta", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> Toast.makeText(Login.this, "Error de conexión: " + error.getMessage(), Toast.LENGTH_LONG).show()
+                error -> {
+                    String msg = "Error de conexión";
+                    if (error.networkResponse != null) {
+                        msg += " - Código: " + error.networkResponse.statusCode;
+                    }
+                    Toast.makeText(Login.this, msg, Toast.LENGTH_LONG).show();
+                }
+
         ) {
             @Override
             protected Map<String, String> getParams() {
