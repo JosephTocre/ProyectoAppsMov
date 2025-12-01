@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SesionesFragment">
+    android:id="@+id/layoutSesiones"
+    tools:context=".activity_sesiones">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/breatheView"
@@ -24,12 +25,22 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Título de la categoría -->
+            <ImageButton
+                android:id="@+id/btnRegresar"
+                android:layout_marginTop="20dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:src="@drawable/ic_arrow_back"
+                android:contentDescription="Regresar"/>
+
             <TextView
                 android:id="@+id/tvTituloCategoria"
                 android:layout_width="wrap_content"
@@ -42,7 +53,6 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <!-- Sección de Videos -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +61,6 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textStyle="bold" />
 
-            <!-- Lista de Videos -->
             <LinearLayout
                 android:id="@+id/containerVideos"
                 android:layout_width="match_parent"
@@ -59,7 +68,6 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="32dp">
 
-                <!-- Video 1 -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
@@ -75,17 +83,14 @@
                         android:orientation="horizontal"
                         android:padding="12dp">
 
-                        <!-- Miniatura del video -->
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
                             android:background="#E0E0E0"
-                            android:src="@drawable/ic_play"
-                            android:padding="16dp"
+                            android:src="@drawable/medi1"
                             android:layout_marginEnd="12dp"/>
 
-                        <!-- Información del video -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -121,7 +126,6 @@
                                 android:ellipsize="end"/>
                         </LinearLayout>
 
-                        <!-- Icono de play -->
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
@@ -132,7 +136,6 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Video 2 (Estructura similar) -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
@@ -153,8 +156,7 @@
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
                             android:background="#E0E0E0"
-                            android:src="@drawable/ic_play"
-                            android:padding="16dp"
+                            android:src="@drawable/medi2"
                             android:layout_marginEnd="12dp"/>
 
                         <LinearLayout
@@ -204,7 +206,6 @@
 
             </LinearLayout>
 
-            <!-- Sección de Audios -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,14 +214,12 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textStyle="bold" />
 
-            <!-- Lista de Audios -->
             <LinearLayout
                 android:id="@+id/containerAudios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Audio 1 -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -236,16 +235,13 @@
                         android:orientation="horizontal"
                         android:padding="16dp">
 
-                        <!-- Icono de audio -->
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_play"
+                            android:src="@drawable/medi3"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="16dp"
-                            app:tint="#666666" />
+                            android:layout_marginEnd="16dp"/>
 
-                        <!-- Información del audio -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -271,7 +267,6 @@
                                 android:textColor="#666666"/>
                         </LinearLayout>
 
-                        <!-- Icono de play -->
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
@@ -282,7 +277,6 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Audio 2 (Estructura similar) -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -301,10 +295,9 @@
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_play"
+                            android:src="@drawable/medi4"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="16dp"
-                            app:tint="#666666" />
+                            android:layout_marginEnd="16dp"/>
 
                         <LinearLayout
                             android:layout_width="0dp"

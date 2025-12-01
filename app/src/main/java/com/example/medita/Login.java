@@ -23,7 +23,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 
     EditText etUsuario, etClave;
-    private final String URL_LOGIN = "http://192.168.1.36/medita/login.php";
+    private final String URL_LOGIN = "http://192.168.100.3/medita/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -70,11 +70,4 @@ public class barra_nav extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) { }
         });
     }
-    public void mostrarSesionesFragment(String categoria, String titulo) {
-        SesionesFragment fragment = SesionesFragment.newInstance(categoria, titulo);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_home_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
 }
