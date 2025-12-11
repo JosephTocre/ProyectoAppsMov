@@ -1,11 +1,9 @@
 package com.example.medita;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,19 +58,15 @@ public class activity_sesiones extends AppCompatActivity {
         inicializarCategorias();
         Contenido contenido = categoriasMap.getOrDefault(categoria, categoriasMap.get("default"));
 
-        // Videos
         asignarVideo(R.id.videomedi1, R.id.tvTituloVideo1, R.id.tvDescripcionVideo1, R.id.tvDuracionVideo1,
                 contenido.videoTitulos[0], contenido.videoDescripciones[0], contenido.videoDuraciones[0], contenido.videoUrls[0]);
-
         asignarVideo(R.id.videomedi2, R.id.tvTituloVideo2, R.id.tvDescripcionVideo2, R.id.tvDuracionVideo2,
                 contenido.videoTitulos[1], contenido.videoDescripciones[1], contenido.videoDuraciones[1], contenido.videoUrls[1]);
 
-        // Audios
         asignarAudio(R.id.audio1, R.id.tvTituloAudio1, R.id.tvDuracionAudio1,
-                contenido.audioTitulos[0], contenido.audioUrls[0], contenido.audioDuraciones[0]);
-
+                contenido.audioTitulos[0], 0, contenido.audioDuraciones[0]);
         asignarAudio(R.id.audio2, R.id.tvTituloAudio2, R.id.tvDuracionAudio2,
-                contenido.audioTitulos[1], contenido.audioUrls[1], contenido.audioDuraciones[1]);
+                contenido.audioTitulos[1], 1, contenido.audioDuraciones[1]);
     }
 
     private void asignarVideo(int cardId, int tvTituloId, int tvDescripcionId, int tvDuracionId,
@@ -95,7 +89,7 @@ public class activity_sesiones extends AppCompatActivity {
     }
 
     private void asignarAudio(int cardId, int tvTituloId, int tvDuracionId,
-                              String titulo, String urlAudio, String duracion) {
+                              String titulo, int audioIndex, String duracion) {
         MaterialCardView card = findViewById(cardId);
         TextView tvTitulo = findViewById(tvTituloId);
         TextView tvDuracion = findViewById(tvDuracionId);
@@ -105,8 +99,7 @@ public class activity_sesiones extends AppCompatActivity {
 
         card.setOnClickListener(v -> {
             Intent i = new Intent(activity_sesiones.this, activity_audio_medita.class);
-            i.putExtra("tituloAudio", titulo);
-            i.putExtra("urlAudio", urlAudio);
+            i.putExtra("audioIndex", audioIndex); // pasamos el índice correcto
             startActivity(i);
         });
     }
@@ -117,8 +110,8 @@ public class activity_sesiones extends AppCompatActivity {
                 new String[]{"Relaja tu mente y cuerpo", "Técnicas para reducir estrés"},
                 new String[]{"10 min", "15 min"},
                 new String[]{
-                        "https://www.youtube.com/watch?v=IShkpOm63gg",
-                        "https://youtu.be/nAR2PUPyH1I"
+                        "https://www.youtube.com/watch?v=JnsSiloyFYQ",
+                        "https://www.youtube.com/watch?v=RMC5cGccE_4"
                 },
                 new String[]{"Audio AntiEstrés 1", "Audio AntiEstrés 2"},
                 new String[]{
@@ -133,8 +126,8 @@ public class activity_sesiones extends AppCompatActivity {
                 new String[]{"Ejercicios para enfocarte mejor", "Meditación para aumentar concentración"},
                 new String[]{"12 min", "15 min"},
                 new String[]{
-                        "https://www.youtube.com/watch?v=O_-IAOE2bxg",
-                        "https://www.youtube.com/watch?v=VZntgp8is8Q"
+                        "https://www.youtube.com/watch?v=E8Jr0KoQGW0",
+                        "https://www.youtube.com/watch?v=RH_yhzvhp_c"
                 },
                 new String[]{"Audio Concentración 1", "Audio Concentración 2"},
                 new String[]{
@@ -149,8 +142,8 @@ public class activity_sesiones extends AppCompatActivity {
                 new String[]{"Relajación profunda para ansiedad", "Técnicas de respiración contra ansiedad"},
                 new String[]{"10 min", "12 min"},
                 new String[]{
-                        "https://youtu.be/2BmdKnVcPtc",
-                        "https://www.youtube.com/watch?v=-OQWTMrPTPE"
+                        "https://www.youtube.com/Ug4LDCfajeA",
+                        "https://www.youtube.com/watch?v=LmUDWMHnPzQ"
                 },
                 new String[]{"Audio Ansiedad 1", "Audio Ansiedad 2"},
                 new String[]{
@@ -165,8 +158,8 @@ public class activity_sesiones extends AppCompatActivity {
                 new String[]{"Relajación profunda para relajación", "Meditaciones para calmar la mente"},
                 new String[]{"10 min", "12 min"},
                 new String[]{
-                        "https://youtu.be/1zkp0lrSJBY",
-                        "https://www.youtube.com/watch?v=3oCC4NDgYrY"
+                        "https://www.youtube.com/shorts/GyVBS01ares?feature=share",
+                        "https://www.youtube.com/watch?v=MkV5ndHffGE"
                 },
                 new String[]{"Audio Relajación 1", "Audio Relajación 2"},
                 new String[]{
@@ -181,8 +174,8 @@ public class activity_sesiones extends AppCompatActivity {
                 new String[]{"Aprende a calmarte", "Técnicas de meditación para la ira"},
                 new String[]{"10 min", "15 min"},
                 new String[]{
-                        "https://www.youtube.com/watch?v=9-IOMXpv7Ys",
-                        "https://www.youtube.com/watch?v=vB6OxxhSzCA"
+                        "https://www.youtube.com/watch?v=8b6ZuX_WMMo",
+                        "https://www.youtube.com/watch?v=RCGmD1Fwzd8"
                 },
                 new String[]{"Audio Ira 1", "Audio Ira 2"},
                 new String[]{
