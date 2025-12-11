@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
                 notificationManager.createNotificationChannel(channel);
             }
         }
-
         FirebaseMessaging.getInstance().subscribeToTopic("nirvana_global")
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
     public void MostrarLogin(View view) {
         Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);

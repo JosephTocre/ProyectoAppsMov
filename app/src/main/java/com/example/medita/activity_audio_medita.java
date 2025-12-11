@@ -32,7 +32,6 @@ public class activity_audio_medita extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_medita);
 
-        // Inicializar vistas
         btnPlayPause = findViewById(R.id.btnPlayPause);
         seekBar = findViewById(R.id.seekBarAudio);
         tvTiempoActual = findViewById(R.id.tvTiempoActual);
@@ -58,7 +57,6 @@ public class activity_audio_medita extends AppCompatActivity {
             }
         });
 
-        // SeekBar
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

@@ -44,15 +44,12 @@ public class fragment_reports extends Fragment {
         rachaContainer = view.findViewById(R.id.rachaContainer);
 
         cargarGraficos();
-
         return view;
     }
-
     private void cargarGraficos() {
         SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, getActivity().MODE_PRIVATE);
 
-        // --- Gráfico de tiempo ---
-        String[] dias = {"Hoy", "Martes", "Mié", "Jue", "Vie", "Sáb", "Dom"};
+        String[] dias = {"Día 1", "Día 2", "Día 3", "Día 4", "Día 5", "Día 6", "Día 7"};
         List<BarEntry> entriesTiempo = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             int tiempo = prefs.getInt("tiempo_dia_" + i, 0);
@@ -69,7 +66,6 @@ public class fragment_reports extends Fragment {
         chartTiempo.getXAxis().setGranularity(1f);
         chartTiempo.invalidate();
 
-        // --- Racha diaria como rectángulos con nombre de los días ---
         rachaContainer.removeAllViews();
 
         AppMedita app = (AppMedita) requireActivity().getApplication();
@@ -89,13 +85,11 @@ public class fragment_reports extends Fragment {
             dayView.setTextColor(Color.WHITE);
             dayView.setTextSize(14f);
 
-            // Color según racha
             int colorFondo = rachaDia > 0
                     ? ContextCompat.getColor(getContext(), R.color.purple_500)
                     : ContextCompat.getColor(getContext(), R.color.gray);
             dayView.setBackgroundColor(colorFondo);
 
-            // Animación de scale
             ScaleAnimation anim = new ScaleAnimation(
                     0f, 1f, 0f, 1f,
                     ScaleAnimation.RELATIVE_TO_SELF, 0.5f,

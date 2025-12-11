@@ -99,11 +99,10 @@ public class activity_sesiones extends AppCompatActivity {
 
         card.setOnClickListener(v -> {
             Intent i = new Intent(activity_sesiones.this, activity_audio_medita.class);
-            i.putExtra("audioIndex", audioIndex); // pasamos el índice correcto
+            i.putExtra("audioIndex", audioIndex);
             startActivity(i);
         });
     }
-
     private void inicializarCategorias() {
         categoriasMap.put("antiestres", new Contenido(
                 new String[]{"Meditación AntiEstrés 1", "Meditación AntiEstrés 2"},

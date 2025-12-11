@@ -102,7 +102,6 @@ public class dormir extends Fragment implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // No usamos
     }
 
     @Override

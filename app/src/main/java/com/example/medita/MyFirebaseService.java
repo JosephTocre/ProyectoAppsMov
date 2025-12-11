@@ -22,10 +22,8 @@ public class MyFirebaseService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + token);
         sendRegistrationToServer(token);
     }
-
     private void sendRegistrationToServer(String token) {
     }
-
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
@@ -43,7 +41,6 @@ public class MyFirebaseService extends FirebaseMessagingService {
             sendNotification(title, body);
         }
     }
-
     private void handleNow() {
     }
 
@@ -74,6 +71,4 @@ public class MyFirebaseService extends FirebaseMessagingService {
 
         notificationManager.notify(0, notificationBuilder.build());
     }
-
-
 }

@@ -34,9 +34,6 @@ public class activity_reproductor_video extends AppCompatActivity {
             }
         });
     }
-
-
-    // Método simple para extraer ID de YouTube
     private String extractYoutubeId(String url) {
         if (url == null) return null;
 
@@ -53,7 +50,6 @@ public class activity_reproductor_video extends AppCompatActivity {
                 return id;
             }
         }
-
         return null;
     }
 }

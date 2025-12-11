@@ -31,7 +31,6 @@ public class home extends Fragment {
                 tvSaludo.setText("Hola, " + nombreUsuario);
             }
         }
-
         configurarClicks(view);
         return view;
     }
@@ -74,8 +73,6 @@ public class home extends Fragment {
                 cardIra
         ));
     }
-
-
     private void abrirSesiones(String categoria, String titulo, MaterialCardView cardView) {
 
         int colorFondo = 0;
