@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tiempo en la app (minutos)"
+            android:text="Tiempo en minutos en la app"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Racha diaria (días consecutivos)"
+            android:text="Racha diaria"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -36,11 +36,10 @@
         <LinearLayout
             android:id="@+id/rachaContainer"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginBottom="24dp"
-            android:weightSum="7">
+            android:padding="8dp">
         </LinearLayout>
 
     </LinearLayout>

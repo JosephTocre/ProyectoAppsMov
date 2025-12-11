@@ -10,21 +10,21 @@ import android.view.ViewGroup;
 import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class fragment_reports extends Fragment {
 
@@ -46,10 +46,25 @@ public class fragment_reports extends Fragment {
         cargarGraficos();
         return view;
     }
+
     private void cargarGraficos() {
+
         SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, getActivity().MODE_PRIVATE);
 
-        String[] dias = {"Día 1", "Día 2", "Día 3", "Día 4", "Día 5", "Día 6", "Día 7"};
+        String[] dias = new String[7];
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", new Locale("es", "ES"));
+        Calendar calendar = Calendar.getInstance();
+
+        dias[0] = "Hoy";
+
+        for (int i = 1; i < 7; i++) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            String diaNombre = sdf.format(calendar.getTime());
+            diaNombre = diaNombre.substring(0, 1).toUpperCase() + diaNombre.substring(1);
+            dias[i] = diaNombre;
+        }
+
         List<BarEntry> entriesTiempo = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             int tiempo = prefs.getInt("tiempo_dia_" + i, 0);
@@ -58,13 +73,16 @@ public class fragment_reports extends Fragment {
 
         BarDataSet dataSetTiempo = new BarDataSet(entriesTiempo, "Tiempo en minutos");
         dataSetTiempo.setColor(ContextCompat.getColor(requireContext(), R.color.teal_700));
+
         BarData barDataTiempo = new BarData(dataSetTiempo);
         chartTiempo.setData(barDataTiempo);
+
         chartTiempo.getDescription().setEnabled(false);
         chartTiempo.getXAxis().setValueFormatter(new IndexAxisValueFormatter(dias));
         chartTiempo.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chartTiempo.getXAxis().setGranularity(1f);
         chartTiempo.invalidate();
+
 
         rachaContainer.removeAllViews();
 
@@ -72,33 +90,42 @@ public class fragment_reports extends Fragment {
         int rachaHoy = app.getRachaDiaria();
 
         for (int i = 0; i < 7; i++) {
+
             int rachaDia = (i == 0) ? rachaHoy : prefs.getInt("racha_dia_" + i, 0);
 
             TextView dayView = new TextView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    0, LinearLayout.LayoutParams.MATCH_PARENT, 1f);
-            params.setMargins(8, 0, 8, 0);
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(20, 15, 20, 15);
             dayView.setLayoutParams(params);
 
-            dayView.setGravity(Gravity.CENTER);
-            dayView.setText(dias[i]);
+            dayView.setPadding(40, 40, 40, 40);
+            dayView.setGravity(Gravity.CENTER_VERTICAL);
+            dayView.setTextSize(20f);
             dayView.setTextColor(Color.WHITE);
-            dayView.setTextSize(14f);
+            dayView.setText(dias[i]);
+
+            dayView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_dia));
 
             int colorFondo = rachaDia > 0
-                    ? ContextCompat.getColor(getContext(), R.color.purple_500)
+                    ? ContextCompat.getColor(getContext(), R.color.teal_700)
                     : ContextCompat.getColor(getContext(), R.color.gray);
-            dayView.setBackgroundColor(colorFondo);
+
+            dayView.getBackground().setTint(colorFondo);
 
             ScaleAnimation anim = new ScaleAnimation(
-                    0f, 1f, 0f, 1f,
+                    0.8f, 1f,
+                    0.8f, 1f,
                     ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF, 0.5f
             );
-            anim.setDuration(400);
+            anim.setDuration(300);
             dayView.startAnimation(anim);
 
             rachaContainer.addView(dayView);
         }
+
     }
 }
